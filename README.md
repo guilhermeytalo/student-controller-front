@@ -1,81 +1,170 @@
-# Vuetify (Default)
 
-This is the official scaffolding tool for Vuetify, designed to give you a head start in building your new Vuetify application. It sets up a base template with all the necessary configurations and standard directory structure, enabling you to begin development without the hassle of setting up the project from scratch.
+# 🪐 Projeto Orbita(Outdated)
 
-## ❗️ Important Links
+Bem-vindo ao projeto Orbita! Este sistema foi desenvolvido para facilitar o gerenciamento de alunos por meio de uma interface web eficiente e moderna.
 
-- 📄 [Docs](https://vuetifyjs.com/)
-- 🚨 [Issues](https://issues.vuetifyjs.com/)
-- 🏬 [Store](https://store.vuetifyjs.com/)
-- 🎮 [Playground](https://play.vuetifyjs.com/)
-- 💬 [Discord](https://community.vuetifyjs.com)
+## 📚 **Descrição do Projeto**
 
-## 💿 Install
+O objetivo do projeto é permitir que usuários administrativos de instituições possam gerenciar o cadastro de alunos, incluindo a criação, edição, visualização e exclusão de registros. 
 
-Set up your project using your preferred package manager. Use the corresponding command to install the dependencies:
+### Principais Funcionalidades:
+- Cadastro de novos alunos.
+- Edição de informações de alunos existentes.
+- Exclusão de registros de alunos.
+- Busca na lista de alunos.
+- Listagem detalhada de alunos cadastrados.
 
-| Package Manager                                                | Command        |
-|---------------------------------------------------------------|----------------|
-| [yarn](https://yarnpkg.com/getting-started)                   | `yarn install` |
-| [npm](https://docs.npmjs.com/cli/v7/commands/npm-install)     | `npm install`  |
-| [pnpm](https://pnpm.io/installation)                          | `pnpm install` |
-| [bun](https://bun.sh/#getting-started)                        | `bun install`  |
+## 🛠️ **Tecnologias Utilizadas**
 
-After completing the installation, your environment is ready for Vuetify development.
+**Frontend**:
+- **Framework**: Vue 3
+- **Bibliotecas**:
+  - Vuetify (UI Component Library)
+  - Axios (HTTP Client)
+  - Vuelidate (Validação de Formulários)
 
-## ✨ Features
+**Backend**:
+- **Linguagem**: .NET (C#)
+- **Banco de Dados**: PostgreSQL
+- **Contêinerização**: Docker
 
-- 🖼️ **Optimized Front-End Stack**: Leverage the latest Vue 3 and Vuetify 3 for a modern, reactive UI development experience. [Vue 3](https://v3.vuejs.org/) | [Vuetify 3](https://vuetifyjs.com/en/)
-- 🗃️ **State Management**: Integrated with [Pinia](https://pinia.vuejs.org/), the intuitive, modular state management solution for Vue.
-- 🚦 **Routing and Layouts**: Utilizes Vue Router for SPA navigation and vite-plugin-vue-layouts for organizing Vue file layouts. [Vue Router](https://router.vuejs.org/) | [vite-plugin-vue-layouts](https://github.com/JohnCampionJr/vite-plugin-vue-layouts)
-- 💻 **Enhanced Development Experience**: Benefit from TypeScript's static type checking and the ESLint plugin suite for Vue, ensuring code quality and consistency. [TypeScript](https://www.typescriptlang.org/) | [ESLint Plugin Vue](https://eslint.vuejs.org/)
-- ⚡ **Next-Gen Tooling**: Powered by Vite, experience fast cold starts and instant HMR (Hot Module Replacement). [Vite](https://vitejs.dev/)
-- 🧩 **Automated Component Importing**: Streamline your workflow with unplugin-vue-components, automatically importing components as you use them. [unplugin-vue-components](https://github.com/antfu/unplugin-vue-components)
-- 🛠️ **Strongly-Typed Vue**: Use vue-tsc for type-checking your Vue components, and enjoy a robust development experience. [vue-tsc](https://github.com/johnsoncodehk/volar/tree/master/packages/vue-tsc)
+## 🏗️ **Arquitetura do Projeto**
 
-These features are curated to provide a seamless development experience from setup to deployment, ensuring that your Vuetify application is both powerful and maintainable.
+### **Backend**
+- Estruturado seguindo o padrão **MVC**:
+  - **Controllers**: Responsáveis por processar as requisições.
+  - **Models**: Representação dos dados e regras de negócio.
+  - **Services**: Contêm a lógica de negócios.
+  - **Data**: Conexão e configuração do banco de dados.
+  
+### **Frontend**
+- Modularizado para melhor organização e manutenção do código:
+  - **Layouts**: Estruturas de página.
+  - **Pages**: Componentes principais de telas.
+  - **Stores**: Gerenciamento de estado (com Pinia ou Vuex).
+  - **Plugins**: Configurações e integrações.
+  - **Utils**: Funções reutilizáveis e auxiliares.
 
-## 💡 Usage
+## 🚀 **Como Configurar o Ambiente**
 
-This section covers how to start the development server and build your project for production.
+### Pré-requisitos:
+- **Node.js** instalado.
+- **Docker** configurado.
 
-### Starting the Development Server
+### Instruções de Instalação:
+2. Instale as dependências do **frontend**:
+   ```bash
+   cd orbita-challenge-front
+   npm install
+   ```
 
-To start the development server with hot-reload, run the following command. The server will be accessible at [http://localhost:3000](http://localhost:3000):
+3. Configure o **backend**:
+   ```bash
+   cd orbita-challenge-back/orbita-challenge-back
+   docker compose build
+   ```
+   
+4. Criação da Tabela no **Banco de Dados**
 
-```bash
-yarn dev
-```
+    Com o docker executando(`docker compose up`) na mesma pasta do backend, é necessário configurar o banco de dados PostgreSQL e criar a tabela `students`. Siga as instruções abaixo:
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+    #### Passo 1: Acesse o banco de dados no container Docker
+    ```bash
+        docker exec -it db psql -U postgres
+    ```
 
-> Add NODE_OPTIONS='--no-warnings' to suppress the JSON import warnings that happen as part of the Vuetify import mapping. If you are on Node [v21.3.0](https://nodejs.org/en/blog/release/v21.3.0) or higher, you can change this to NODE_OPTIONS='--disable-warning=5401'. If you don't mind the warning, you can remove this from your package.json dev script.
+    Após isso, você verá uma tela semelhante a esta:
+    ```
+        psql (12.21 (Debian 12.21-1.pgdg120+1))
+        Type "help" for help.
+        postgres=#
+    ```
 
-### Building for Production
+   #### Passo 2: Verifique se a tabela já existe
+    No terminal do PostgreSQL, execute o seguinte comando:
+    ```
+        \dt
+    ```
 
-To build your project for production, use:
+    Caso a tabela `students` não exista, você precisará criá-la.
+    
+    #### Passo 3: Crie a tabela manualmente
+    No terminal do PostgreSQL, copie e cole o comando abaixo para criar a tabela:
+    ```sql
+            CREATE TABLE students (
+            id SERIAL PRIMARY KEY,
+            academic_register VARCHAR(10) UNIQUE NOT NULL,
+            name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) NOT NULL,
+            cpf VARCHAR(14) NOT NULL UNIQUE
+        );
+    ```
+    #### Passo 4: Verifique novamente se a tabela foi criada
+    Para confirmar, execute o comando abaixo:
+    ```
+        \dt
+    ```
+    Agora, você deverá ver uma saída semelhante a esta:
 
-```bash
-yarn build
-```
+    ```
+                List of relations
+        Schema |   Name   | Type  |  Owner   
+        --------+----------+-------+----------
+        public | students | table | postgres
+        (1 row)
+    ```
+    Pronto! O banco de dados está configurado e pronto para uso pelo backend.
 
-(Repeat for npm, pnpm, and bun with respective commands.)
+## ▶️ **Como Executar o Projeto**
 
-Once the build process is completed, your application will be ready for deployment in a production environment.
+### Frontend:
+1. Na pasta `orbita-challenge-front`, inicie o servidor:
+   ```node
+    npm run dev
+   ```
 
-## 💪 Support Vuetify Development
+### Backend:
+1. Na pasta `orbita-challenge-back/orbita-challenge-back`, rode o backend:
+   ```bash
+   dotnet run
+   ```
 
-This project is built with [Vuetify](https://vuetifyjs.com/en/), a UI Library with a comprehensive collection of Vue components. Vuetify is an MIT licensed Open Source project that has been made possible due to the generous contributions by our [sponsors and backers](https://vuetifyjs.com/introduction/sponsors-and-backers/). If you are interested in supporting this project, please consider:
+2. Suba os contêineres do Docker:
+   ```bash
+   docker compose up
+   ```
+3. Através do swagger tente executar a rota `/test`ela é um endpoint dummy para validar se de tudo certo, e se conseguiu executar o backend
 
-- [Requesting Enterprise Support](https://support.vuetifyjs.com/)
-- [Sponsoring John on Github](https://github.com/users/johnleider/sponsorship)
-- [Sponsoring Kael on Github](https://github.com/users/kaelwd/sponsorship)
-- [Supporting the team on Open Collective](https://opencollective.com/vuetify)
-- [Becoming a sponsor on Patreon](https://www.patreon.com/vuetify)
-- [Becoming a subscriber on Tidelift](https://tidelift.com/subscription/npm/vuetify)
-- [Making a one-time donation with Paypal](https://paypal.me/vuetify)
+    em caso de sucesso  você verá a seguinte mensagem de retorno
 
-## 📑 License
-[MIT](http://opensource.org/licenses/MIT)
+    ```
+        Hello World!
+    ```
 
-Copyright (c) 2016-present Vuetify, LLC
+    para o banco de dados pode utilizar a rota `/students` em caso de sucesso
+    ```
+       []
+    ```
+
+## 📝 **Melhorias Futuras**
+- **Testes Unitários**:
+  - Cobrir casos de sucesso e erro no backend e frontend.
+- **Deploy**:
+  - Publicar os projetos em uma plataforma como AWS, Azure ou Vercel para acessibilidade global.
+- **Frontend**
+    - Possíveis casos não esperado de falha ou sucesso.
+
+
+## 📂 **Decisões de Arquitetura**
+
+### Documentação da Solução
+1. **Motivação para o uso do padrão MVC no backend**:
+   - Separação de responsabilidades facilitando a manutenção e extensibilidade do código.
+2. **Uso do Vuetify no frontend**:
+   - Permitindo construir interfaces responsivas com rapidez.
+
+### Ferramentas Utilizadas:
+- Docker para isolar ambiente.
+- Json-Server para simulação de APIs (em ambientes de teste).
+- Git Flow para organização do fluxo de trabalho.
+
